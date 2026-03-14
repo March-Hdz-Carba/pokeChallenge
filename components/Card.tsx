@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   },
   textName: {
     fontSize: 16,
-    color: 'white',
+    color: '#ffff',
   },
   textNumberPoke: {
     fontSize: 16,
