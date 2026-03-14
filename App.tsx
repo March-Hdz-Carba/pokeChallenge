@@ -1,12 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialDesignIcons } from '@react-native-vector-icons/material-design-icons';
+
+
+function HomeScreen() {
+  return (
+    <View>
+      <Text>Home!</Text>
+    </View>
+  );
+}
 
 export default function App() {
+  const Tab = createBottomTabNavigator();
+
   return (
-    <View style={styles.container}>
-      <Text>Hola Mundo!!!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={() => ({
+          tabBarIcon: () => <MaterialDesignIcons name='pokeball' color='#ff0000' size={20} />,
+          headerShown: false,
+        })}
+      >
+        <Tab.Screen name='Home' component={HomeScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
