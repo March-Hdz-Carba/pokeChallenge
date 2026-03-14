@@ -16,7 +16,7 @@
     "format": "prettier:fix"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^3.0.1",
+    "@react-native-async-storage/async-storage": "^2.2.0",
     "@react-native-community/cli": "latest",
     "@react-native-vector-icons/material-design-icons": "^12.4.2",
     "@react-navigation/bottom-tabs": "^7.15.5",
