@@ -3,15 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialDesignIcons } from '@react-native-vector-icons/material-design-icons';
-
-
-function HomeScreen() {
-  return (
-    <View>
-      <Text>Home!</Text>
-    </View>
-  );
-}
+import HomeScreen from './views/HomeScreen';
 
 export default function App() {
   const Tab = createBottomTabNavigator();
