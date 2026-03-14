@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, RefreshControl } from 'react-native';
 import Card from '../components/Card';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
@@ -10,7 +10,7 @@ export default function HomeScreen() {
     return response.json();
   }
 
-  const { data, isLoading, hasNextPage, fetchNextPage, isFetching, error } = useInfiniteQuery({
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetching, error, refetch } = useInfiniteQuery({
     queryKey: ['getAllPokemons'],
     queryFn: getAllPokemons,
     getNextPageParam: lastPage => {
@@ -36,6 +36,7 @@ export default function HomeScreen() {
         numColumns={2}
         onEndReached={loadMore}
         onEndReachedThreshold={0.2}
+        refreshControl={<RefreshControl size='default' refreshing={isFetching || isFetching} onRefresh={refetch} />}
       />
     </View>
   );
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     borderColor: 'red',
     borderWidth: 1,
-    marginTop: 60,
-    marginHorizontal: 5,
+    marginTop: '20%',
+    marginHorizontal: '2%',
   },
 });
