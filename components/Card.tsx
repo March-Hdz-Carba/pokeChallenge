@@ -1,19 +1,32 @@
 import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
+import { useQuery } from '@tanstack/react-query';
+import { capitalize } from '../Helpers/Utils';
 
 const { height } = Dimensions.get('screen');
 
-export default function Card({ pokemon }: { pokemon?: { number: string, name: string } }) {
+export default function Card({ pokemon }: { pokemon?: { name: string, url: string } }) {
+
+  const getPokemon = async () => {
+    const response = await fetch(`${pokemon?.url}`);
+    return response.json();
+  }
+
+  const { data: pokemonData } = useQuery({
+    queryKey: ['pokemon', pokemon?.url],
+    queryFn: getPokemon,
+  });
+
   return (
     <View style={styles.container}>
       <View style={styles.cardContainer}>
         <Image
-          source={require('../assets/favicon.png')}
+          source={{uri: pokemonData?.sprites?.other?.['official-artwork']?.front_default}}
           style={styles.pokemonImg}
         />
 
         <View style={styles.textContainer}>
-          <Text style={styles.textNumberPoke}>{pokemon?.number}</Text>
-          <Text style={styles.textName}>{pokemon?.name}</Text>
+          <Text style={styles.textNumberPoke}>{`#${(pokemonData?.id).toString().padStart(3, '0')}`}</Text>
+          <Text style={styles.textName}>{capitalize(pokemonData?.name || '')}</Text>
         </View>
       </View>
     </View>
@@ -23,8 +36,6 @@ export default function Card({ pokemon }: { pokemon?: { number: string, name: st
 const styles = StyleSheet.create({
   container: {
     margin: 10,
-    borderColor: 'blue',
-    borderWidth: 1,
     height: 150,
     width: '45%',
     justifyContent: 'flex-end',
@@ -39,13 +50,14 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     backgroundColor: '#676767',
-    borderRadius: 8,
+    borderRadius: 10,
     flexDirection: 'row',
-    gap: 25,
+    gap: 20,
     height: 30,
     justifyContent: 'center',
+    alignItems: 'center',
     marginTop: '5%',
-    width: '80%'
+    width: '90%'
   },
   textName: {
     fontSize: 16,
@@ -56,7 +68,6 @@ const styles = StyleSheet.create({
     color: '#F993FB',
   },
   pokemonImg: {
-    backgroundColor: 'lightgray',
     height: '100%',
     width: '60%'
   }
