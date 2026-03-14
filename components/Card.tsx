@@ -1,8 +1,10 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
+
+const { height } = Dimensions.get('screen');
 
 export default function Card({ pokemon }: { pokemon?: { number: string, name: string } }) {
   return (
-    <View style={styles.conteiner}>
+    <View style={styles.container}>
       <View style={styles.cardContainer}>
         <Image
           source={require('../assets/favicon.png')}
@@ -19,20 +21,20 @@ export default function Card({ pokemon }: { pokemon?: { number: string, name: st
 }
 
 const styles = StyleSheet.create({
-  conteiner: {
+  container: {
     margin: 10,
     borderColor: 'blue',
     borderWidth: 1,
     height: 150,
+    width: '45%',
     justifyContent: 'flex-end',
   },
   cardContainer: {
     alignItems: 'center',
     backgroundColor: '#FB71FE',
     borderRadius: 20,
-    height: 120,
-    width: 170,
-    paddingBottom: 15,
+    height: height * 0.13,
+    paddingBottom: '5%',
     justifyContent: 'flex-end'
   },
   textContainer: {
@@ -42,8 +44,8 @@ const styles = StyleSheet.create({
     gap: 25,
     height: 30,
     justifyContent: 'center',
-    marginTop: 8,
-    width: 140
+    marginTop: '5%',
+    width: '80%'
   },
   textName: {
     fontSize: 16,
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
   },
   pokemonImg: {
     backgroundColor: 'lightgray',
-    height: 100,
-    width: 100
+    height: '100%',
+    width: '60%'
   }
 });
