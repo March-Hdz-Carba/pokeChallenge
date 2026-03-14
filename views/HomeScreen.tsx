@@ -1,19 +1,41 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import Card from '../components/Card';
+import { useInfiniteQuery } from '@tanstack/react-query';
+
+const BASE_URL = 'https://pokeapi.co/api/v2/pokemon';
 
 export default function HomeScreen() {
+  const getAllPokemons = async ({ pageParam = 1 }) => {
+    const response = await fetch(`${ pageParam === 1 ? BASE_URL : pageParam}`);
+    return response.json();
+  }
+
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetching, error } = useInfiniteQuery({
+    queryKey: ['getAllPokemons'],
+    queryFn: getAllPokemons,
+    getNextPageParam: lastPage => {
+        if (lastPage.next !== null) {
+        return lastPage.next;
+      }
+
+      return lastPage;
+    }
+  });
+
+  const loadMore = () => {
+    if (hasNextPage) {
+      fetchNextPage();
+    }
+  }
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={[
-          { number: '1', name: 'Pikachu' },
-          { number: '2', name: 'Bulbasaur' },
-          { number: '3', name: 'Charmander' },
-          { number: '4', name: 'Squirtle' },
-          { number: '5', name: 'Jigglypuff' }
-        ]}
+        data={data?.pages.flatMap(page => page.results) || []}
         renderItem={({ item }) => <Card pokemon={item} />}
         numColumns={2}
+        onEndReached={loadMore}
+        onEndReachedThreshold={0.2}
       />
     </View>
   );
