@@ -1,20 +1,35 @@
-import { View, Text, TextInput, StyleSheet, Image } from 'react-native';
-import  Title  from './Title'; 
+import { StyleSheet, TextInput, View } from 'react-native';
+import Title from './Title';
 
-export const Header = () => {
+type HeaderProps = {
+  typing: string;
+  setTyping: (text: string) => void;
+  setSearch: (text: string) => void;
+};
+
+export const Header: React.FC<HeaderProps> = ({
+  typing,
+  setTyping,
+  setSearch
+}) => {
   return (
     <View style={styles.container}>
       <Title />
-      <TextInput style={styles.textInput} placeholder='Search Pokemon' />
+      <TextInput
+        style={styles.textInput}
+        placeholder="Search Pokemon"
+        value={typing}
+        onChangeText={text => setTyping(text)}
+        onEndEditing={() => setSearch(typing)}
+      />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '30%',
-    justifyContent: 'center',
     alignItems: 'center',
     gap: 10
   },

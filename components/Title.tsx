@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   titleLogo: {
     height: '45%',
     marginBottom: '5%',
+    marginTop: '2%',
     width: '70%'
   }
 });
