@@ -1,6 +1,7 @@
 import { StyleSheet, View, FlatList, RefreshControl } from 'react-native';
 import Card from '../components/Card';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { Header } from '../components/Header';
 
 const BASE_URL = 'https://pokeapi.co/api/v2/pokemon';
 
@@ -30,6 +31,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+      <Header />
       <FlatList
         data={data?.pages.flatMap(page => page.results) || []}
         renderItem={({ item }) => <Card pokemon={item} />}
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     borderColor: 'red',
     borderWidth: 1,
-    marginTop: '20%',
+    marginTop: '10%',
     marginHorizontal: '2%',
   },
 });
