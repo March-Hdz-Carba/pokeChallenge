@@ -25,7 +25,7 @@ export default function Card({ pokemon }: { pokemon?: { name: string, url: strin
         />
 
         <View style={styles.textContainer}>
-          <Text style={styles.textNumberPoke}>{`#${(pokemonData?.id).toString().padStart(3, '0')}`}</Text>
+          <Text style={styles.textNumberPoke}>{`#${(pokemonData?.id)?.toString().padStart(3, '0')}`}</Text>
           <Text style={styles.textName}>{capitalize(pokemonData?.name || '')}</Text>
         </View>
       </View>
@@ -35,7 +35,7 @@ export default function Card({ pokemon }: { pokemon?: { name: string, url: strin
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
+    marginHorizontal: '2.5%',
     height: 150,
     width: '45%',
     justifyContent: 'flex-end',
