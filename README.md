@@ -20,4 +20,4 @@ Clone the project and run locally
 # Inspiration Design
 
 [App Pokemon]('https://www.figma.com/design/RrqdzGhaKvUnbzS7W4JYe6/App-Pokemon--Community-?node-id=0-1&p=f&t=Tt4Hmt8Vf9Hm56UK-0')
-![inspiration]('assets/appPokemon.png')
+![inspiration] ('https://github.com/March-Hdz-Carba/pokeChallenge/blob/main/assets/appPokemon.png?raw=true')
